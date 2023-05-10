@@ -1,4 +1,11 @@
-const Filters = ({filters, setFilters}) => {
+type FiltersProps = {
+    filters: {
+        s: string
+    };
+    setFilters: ({}) => void;
+}
+
+const Filters = ({filters, setFilters}: FiltersProps) => {
 
     const handleChange = (name, e) => {
         setFilters({

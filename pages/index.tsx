@@ -5,17 +5,23 @@ import axios from "axios";
 import Loading from "../src/components/Loading";
 
 export default function Home() {
-   const [movies, setMovies] = useState(null);
-    const [totalPage, setTotalPage] = useState(null);
+    const [movies, setMovies] = useState<{
+        imdbID: string,
+        Title: string,
+        Year: string,
+    }[]>(
+        [],
+    );
+    const [totalPage, setTotalPage] = useState<number | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [filters, setFilters] = useState({
         s: "Pokemon",   //title
-        y: null,        //year of release
-        type: null,     // movie, series, episode
+        y: "",        //year of release
+        type: "",     // movie, series, episode
         page: 1,
     });
 
-     useEffect(() => {
+    useEffect(() => {
         const {s, y, type, page} = {...filters};
         setMovies(null);
         setIsLoading(true);
@@ -29,19 +35,19 @@ export default function Home() {
             .finally(() => setIsLoading(false))
     }, [filters]);
 
-  return (
-    <div className={"p-10"}>
-        <h1 className="text-3xl font-bold text-white text-center py-6">
-            MOVIE DATABASE
-        </h1>
+    return (
+        <div className={"p-10"}>
+            <h1 className="text-3xl font-bold text-white text-center py-6">
+                MOVIE DATABASE
+            </h1>
 
-        <div className="flex">
-            <Filters filters={filters} setFilters={setFilters}/>
-            {isLoading && <Loading />}
+            <div className="flex">
+                <Filters filters={filters} setFilters={setFilters}/>
+                {isLoading && <Loading/>}
 
-            {!isLoading && (movies?.length > 0 ? <MovieList movies={movies} totalPage={totalPage} filters={filters}
-                                                            setFilters={setFilters}/> : "no data")}
+                {!isLoading && (movies?.length > 0 ? <MovieList movies={movies} totalPage={totalPage} filters={filters}
+                                                               setFilters={setFilters}/> : "no data")}
+            </div>
         </div>
-    </div>
-  )
+    )
 }

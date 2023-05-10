@@ -4,12 +4,20 @@ import {useRouter} from "next/router";
 import axios from "axios";
 import MovieDetails from "../../src/components/MovieDetails";
 
-const Detail = ({props}) => {
+const Detail = () => {
     const router = useRouter();
     const imdbID = router.query.id;
 
     const [isLoading, setIsLoading] = useState(false);
-    const [movie, setMovie] = useState(null);
+    const [movie, setMovie] = useState<{
+        Poster: string,
+        Title: string,
+        Runtime: string,
+        Genre: string,
+        Director: string,
+        Actors: string,
+        imdbRating: string,
+    }>();
 
     useEffect(() => {
         if (imdbID) {
@@ -29,7 +37,7 @@ const Detail = ({props}) => {
                 MOVIE DETAILS
             </h1>
 
-            {isLoading && <Loading />}
+            {isLoading && <Loading/>}
             {!isLoading && movie && <MovieDetails movie={movie}/>}
         </div>
     );

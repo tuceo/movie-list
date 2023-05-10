@@ -1,11 +1,24 @@
 import {useRouter} from "next/router";
 
-const MovieList = ({movies, totalPage, filters, setFilters}) => {
+type MovieListProps = {
+    [index:number]: {
+        imdbID: string,
+        Title: string,
+        Year: string,
+    };
+    totalPage: number;
+    filters: {
+        page: number
+    };
+    setFilters: ({}) => void;
+}
+
+const MovieList = ({movies, totalPage, filters, setFilters}: MovieListProps) => {
     const router = useRouter();
     const {page} = {...filters};
 
-    const handlePageChange = (targetpage) => {
-        setFilters({...filters, page: targetpage})
+    const handlePageChange = (targetPage) => {
+        setFilters({...filters, page: targetPage})
     };
 
     return (
