@@ -23,7 +23,7 @@ const MovieList = ({movies, totalPage, filters, setFilters}) => {
                 {movies?.map(item => (
                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={item?.imdbID}>
                         <th scope="row"
-                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                            className="cursor-pointer px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                             onClick={() => router.push("/detail/" + item?.imdbID)}>{item?.Title}</th>
                         <td className="px-6 py-4"> {item?.Year}</td>
                         <td className="px-6 py-4">{item?.imdbID}</td>
