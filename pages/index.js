@@ -1,4 +1,3 @@
-import Header from "../src/components/Header";
 import {useEffect, useState} from "react";
 import Filters from "../src/components/Filters";
 import MovieList from "../src/components/MovieList";
